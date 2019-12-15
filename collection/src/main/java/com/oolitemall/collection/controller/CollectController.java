@@ -5,6 +5,7 @@ package和import需要根据项目导入
 
 import com.oolitemall.collection.VO.CollectItemVo;
 import com.oolitemall.collection.domain.CollectItem;
+import com.oolitemall.collection.domain.CollectItemPo;
 import com.oolitemall.collection.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -21,23 +22,22 @@ import java.util.List;
 public class CollectController {
     @Autowired
     private CollectService collectService ;
+    private CollectItem collectItemPo;
 
     /**
      * 用户收藏列表
      *
      * @param userId 用户ID
-     * @param type   类型，如果是0则是商品收藏，如果是1则是专题收藏
      * @param page   分页页数
      * @param limit   分页大小
      * @return 用户收藏列表
      */
     @GetMapping ("/collects")
     public Object list(@RequestParam Integer userId,
-                       @NotNull@RequestParam Byte type,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit
                                   ){
-             return collectService.listCollectByCodition();
+             return collectService.listCollectByCodition(userId);
     }
 
     /**
@@ -50,9 +50,9 @@ public class CollectController {
      * @return 操作结果
      */
 
-
+    @PostMapping ("/collects")
    //@ApiOperation(value = "添加收藏 ")
-    public Object add( @RequestBody CollectItem body) {
+    public Object add( @RequestBody CollectItemPo body) {
          return collectService.addCollect(body);
     }
 

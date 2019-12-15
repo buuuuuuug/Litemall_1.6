@@ -3,6 +3,8 @@ package com.oolitemall.collection.mapper;
 import java.util.List;
 
 import com.oolitemall.collection.domain.CollectItem;
+import com.oolitemall.collection.domain.CollectItemPo;
+import com.oolitemall.collection.domain.GoodsPo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +19,11 @@ public interface CollectMapper {
      * @param
      * @return id
      */
-    void addCollect(CollectItem collectItem);
+    void addCollect(CollectItemPo collectItem);
 
     void deleteCollectById(Integer id);
 
-    List<CollectItem> listCollectByCodition();
+    List<CollectItemPo> listCollectByCodition(Integer userId);
+
+    GoodsPo Goods(Integer id);
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.oolitemall.collection.mapper.CollectMapper">
 
 
-    <insert id="addCollect" parameterType="com.oolitemall.collection.domain.CollectItem" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addCollect" parameterType="com.oolitemall.collection.domain.CollectItemPo" useGeneratedKeys="true" keyProperty="id">
         insert into collect_item(goods_id,user_id,gmt_create,gmt_modified) values(#{goodsId},#{userId},#{gmtCreate},#{gmtModified});
     </insert>
 
@@ -11,7 +11,12 @@
         delete from collect_item where id =#{id};
     </delete>
 
-    <select id="listCollectByCodition" resultType="com.oolitemall.collection.domain.CollectItem" parameterType="String">
-        select * from collect_item;
+    <select id="listCollectByCodition" resultType="com.oolitemall.collection.domain.CollectItemPo" parameterType="Integer">
+        select * from collect_item where user_id =#{userId};
     </select>
+
+    <select id="Goods" resultType="com.oolitemall.collection.domain.GoodsPo" parameterType="Integer">
+        select * from goods where id = #{id}
+    </select>
+
 </mapper>
